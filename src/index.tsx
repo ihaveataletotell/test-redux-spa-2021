@@ -11,7 +11,7 @@ import {Main} from 'src/pages/Main';
 app.startHeartbeat();
 
 ReactDOM.render(
-  <Provider store={app.getStoreMain()}>
+  <Provider store={app.storeMain}>
     <React.StrictMode>
       <Main />
     </React.StrictMode>

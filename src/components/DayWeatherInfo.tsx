@@ -13,7 +13,7 @@ export class DayWeatherInfo extends React.PureComponent<DayWeatherInfoProps> {
 	render() {
 		const {props: {data, className}} = this;
 
-		const dateStr = TextUtils.getDate(data.applicable_date);
+		const dateStr = TextUtils.formatDate(data.applicable_date, 'DD.MM');
 
 		return (
 			<div className={cn('weatherInfo', className)}>

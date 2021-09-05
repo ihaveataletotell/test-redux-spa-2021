@@ -38,4 +38,6 @@ export namespace DataModel {
 		visibility: number;
 		predictability: number;
 	}
+
+	export type GeoCoors = Pick<GeolocationCoordinates, 'latitude' | 'longitude'>;
 }

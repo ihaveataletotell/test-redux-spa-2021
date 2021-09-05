@@ -11,13 +11,15 @@ declare global {
 	}
 
 	interface GeoState {
-		coords: GeolocationCoordinates | null;
+		coords: Partial<GeolocationCoordinates> | null;
+		nearestCities: DataModel.CityInfo[] | null;
 		error: GeolocationPositionError | null;
+		searchQuery: string;
 	}
 
 	interface WeatherState {
 		infoById: {[key: number | string]: DataModel.CityWeatherInfo};
-		activeIds: {[key: number | string]: boolean};
+		activeIds: {[key: number | string]: false | number};
 	}
 
 	interface AppState extends

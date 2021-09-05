@@ -2,6 +2,19 @@
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+    min-height: 160px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.cityWeather__headerWrap {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.cityWeather__header {
+    margin-right: 10px;
 }
 
 .cityWeather__title {
@@ -13,4 +26,11 @@
     flex: 1 1 auto;
     max-width: 200px;
     min-width: 120px;
+    margin-bottom: 10px;
+}
+
+.cityWeather__items {
+    display: flex;
+    flex-flow: row wrap;
+    flex: 1 1 auto;
 }

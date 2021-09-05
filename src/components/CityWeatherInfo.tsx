@@ -2,9 +2,11 @@ import * as React from 'react';
 import {DataModel} from 'src/types/dataModel';
 import './CityWeatherInfo.css';
 import {DayWeatherInfo} from 'src/components/DayWeatherInfo';
+import {TextUtils} from 'src/utils/date';
 
 interface CityWeatherInfoProps {
 	data: DataModel.CityWeatherInfo;
+	slotHeaderRight?: React.ReactNode;
 }
 
 export class CityWeatherInfo extends React.PureComponent<CityWeatherInfoProps> {
@@ -27,21 +29,26 @@ export class CityWeatherInfo extends React.PureComponent<CityWeatherInfoProps> {
 	}
 
 	renderTitle() {
-		const {data} = this;
+		const {data, props} = this;
 
-		const dateObj = new Date(data.time);
-		const date = dateObj.toDateString();
-		const time = `${dateObj.getHours()}:${dateObj.getMinutes()}`;
+		const date = TextUtils.formatDate(data.time, 'DD.MM.YYYY');
+		const time = TextUtils.formatDate(data.time, 'HH:NN');
 
 		return (
 			<div className={'cityWeather__title'}>
-				<h3
-					children={data.title}
-				/>
+				<div className={'cityWeather__headerWrap'}>
+					<h3
+						children={data.title}
+						className={'cityWeather__header'}
+					/>
+
+					{props.slotHeaderRight}
+				</div>
 
 				<div
 					children={`${date} ${time}`}
 				/>
+
 			</div>
 		)
 	}
@@ -51,7 +58,9 @@ export class CityWeatherInfo extends React.PureComponent<CityWeatherInfoProps> {
 			<div className={'cityWeather'}>
 				{this.renderTitle()}
 
-				{this.renderItems()}
+				<div className={'cityWeather__items'}>
+					{this.renderItems()}
+				</div>
 			</div>
 		)
 	}
