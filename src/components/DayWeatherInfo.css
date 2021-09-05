@@ -1,0 +1,25 @@
+.weatherInfo {
+    margin-right: 20px;
+}
+
+.weatherInfo__header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.weatherInfo__title {
+    flex: 0 0 auto;
+    margin-right: 10px;
+    color: #004F79
+}
+
+.weatherInfo__state {
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+.weatherInfo__temp {
+    font-size: 1.4em;
+    font-weight: 500;
+}

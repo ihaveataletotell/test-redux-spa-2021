@@ -1,0 +1,16 @@
+.cityWeather {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.cityWeather__title {
+    flex: 0 0 150px;
+    margin-right: 30px;
+}
+
+.cityWeather__item {
+    flex: 1 1 auto;
+    max-width: 200px;
+    min-width: 120px;
+}

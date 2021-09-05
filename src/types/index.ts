@@ -1,6 +1,5 @@
 import {ThunkDispatch} from 'redux-thunk';
-
-export interface AnyType {}
+import {DataModel} from 'src/types/dataModel';
 
 declare global {
 	interface StateCounter {
@@ -8,26 +7,35 @@ declare global {
 	}
 
 	interface StateCitiesList {
-		cities: AppCity[];
+		citiesList: DataModel.CityInfo[];
 	}
 
-	interface AppState  extends
+	interface GeoState {
+		coords: GeolocationCoordinates | null;
+		error: GeolocationPositionError | null;
+	}
+
+	interface WeatherState {
+		infoById: {[key: number | string]: DataModel.CityWeatherInfo};
+		activeIds: {[key: number | string]: boolean};
+	}
+
+	interface AppState extends
 		StateCounter, StateCitiesList
-	{}
-
-	type AppSimpleActionType =
-		'COUNTER_INCREMENT' | 'COUNTER_DECREMENT';
-
-	interface CounterChangeAction {
-		type: 'COUNTER_CHANGE';
-		value: number;
+	{
+		geo: GeoState;
+		weather: WeatherState;
 	}
 
-	type AppAction<T = AppSimpleActionType> =
-		{type: T}
-		| CounterChangeAction;
+	type AppAction =
+		| CounterAction
+		| GeoAction
+		| CitiesListAction
+		| WeatherAction;
 
 	type AppThunkDispatch = ThunkDispatch<AppState, null, AppAction>;
+
+	type AppThunkAction = (dispatch: AppThunkDispatch, getState: () => AppState) => Promise<void> | void;
 }
 
 declare module 'react-redux' {

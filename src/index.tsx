@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import {app} from 'src/configureStore';
 import {Provider} from 'react-redux'
-import {Main} from 'src/pages/main';
-import {storeMain} from 'src/configureStore';
+import {Main} from 'src/pages/Main';
 
 // import App from './App';
 // import reportWebVitals from './reportWebVitals';
 
+app.startHeartbeat();
+
 ReactDOM.render(
-  <Provider store={storeMain}>
+  <Provider store={app.getStoreMain()}>
     <React.StrictMode>
       <Main />
     </React.StrictMode>

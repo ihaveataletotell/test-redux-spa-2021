@@ -1,6 +1,19 @@
-import {Dispatch} from 'redux';
+import {Action} from 'redux';
 
-export function counter(state: StateCounter['counter'] = 0, action: AppAction) {
+type CounterSimpleActionTypes = 'COUNTER_INCREMENT' | 'COUNTER_DECREMENT';
+
+interface CounterChangeAction {
+	type: 'COUNTER_CHANGE';
+	value: number;
+}
+
+declare global {
+	type CounterAction =
+		| CounterChangeAction
+		| Action<CounterSimpleActionTypes>
+}
+
+export function counter(state: StateCounter['counter'] = 0, action: CounterAction) {
 	if (action.type === 'COUNTER_INCREMENT') {
 		return state + 1;
 
@@ -15,8 +28,8 @@ export function counter(state: StateCounter['counter'] = 0, action: AppAction) {
 	}
 }
 
-export const thunkActionChangeCounter = (delta: number) => {
-	return (dispatch: Dispatch<AppAction>, getState: () => AppState) => {
+export const thunkActionChangeCounter = (delta: number): AppThunkAction => {
+	return (dispatch, getState) => {
 		const state = getState();
 		dispatch({type: 'COUNTER_CHANGE', value: delta + state.counter});
 	}

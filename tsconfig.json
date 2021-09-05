@@ -4,7 +4,8 @@
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext"
+      "esnext",
+      "ES2020"
     ],
     "allowJs": true,
     "skipLibCheck": true,
@@ -16,12 +17,13 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "noEmit": true,
     "baseUrl": ".",
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
+    "src",
+    "tsconfig.d.ts"
   ]
 }
