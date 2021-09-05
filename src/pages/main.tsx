@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
+import {thunkActionChangeCounter} from 'src/stateShapes/counter';
 
 interface MainConnectedState extends StateCounter {}
 
@@ -39,10 +39,10 @@ export const Main = connect(
 			counter: state.counter,
 		}
 	},
-	(dispatch: Dispatch<AppAction>): MainConnectedDispatch => {
+	(dispatch: AppThunkDispatch): MainConnectedDispatch => {
 		return {
-			doIncrement: () => dispatch({type: 'INCREMENT'}),
-			doDecrement: () => dispatch({type: 'DECREMENT'}),
+			doIncrement: () => dispatch(thunkActionChangeCounter(1)),
+			doDecrement: () => dispatch(thunkActionChangeCounter(-1)),
 		}
 	},
 )(MainInner);

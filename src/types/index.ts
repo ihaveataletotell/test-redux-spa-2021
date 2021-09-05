@@ -1,3 +1,5 @@
+import {ThunkDispatch} from 'redux-thunk';
+
 export interface AnyType {}
 
 declare global {
@@ -5,17 +7,33 @@ declare global {
 		counter: number;
 	}
 
-	type AppActionType = 'INCREMENT' | 'DECREMENT';
-
-	interface AppAction<T = AppActionType> {
-		type: T;
+	interface StateCitiesList {
+		cities: AppCity[];
 	}
+
+	interface AppState  extends
+		StateCounter, StateCitiesList
+	{}
+
+	type AppSimpleActionType =
+		'COUNTER_INCREMENT' | 'COUNTER_DECREMENT';
+
+	interface CounterChangeAction {
+		type: 'COUNTER_CHANGE';
+		value: number;
+	}
+
+	type AppAction<T = AppSimpleActionType> =
+		{type: T}
+		| CounterChangeAction;
+
+	type AppThunkDispatch = ThunkDispatch<AppState, null, AppAction>;
 }
 
 declare module 'react-redux' {
-	export interface DefaultRootState extends StateCounter {}
+	export interface DefaultRootState extends AppState {}
 }
 
 declare module 'redux' {
-	export interface Action<T extends AppActionType> extends AppAction<T> {}
+	// export interface Action<T extends AppSimpleActionType> extends AppAction<T> {}
 }
